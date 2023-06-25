@@ -23,8 +23,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         //Seeders
-        $this->call(UserSeeder::class);
         $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+
 
         //Factories
         //Tag::factory(10)->create();
