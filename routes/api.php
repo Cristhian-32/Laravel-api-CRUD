@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +50,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['middleware' => ['auth:api', 'role:user']], function () {
         Route::apiResource('tags', TagController::class);
     });
+
+    Route::apiResource('activities', ActivityController::class);
+    Route::apiResource('records', RecordController::class);
 
