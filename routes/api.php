@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\TagController;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,19 +40,20 @@ Route::group(['middleware' => 'api'], function () {
 
     //Rutas para Administradores (acceso total)
     Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
-        //Route::apiResource('tags', TagController::class);
+        Route::apiResource('activities', ActivityController::class);
+        Route::apiResource('records', RecordController::class);
+        Route::apiResource('asistencias', AsistenciaController::class);
     });
 
     //Rutas para Asesores y/o Profesores
     Route::group(['middleware' => ['auth:api', 'role:adviser']], function () {
-        //Route::apiResource('tags', TagController::class);
+        Route::apiResource('activities', ActivityController::class);
+        Route::get('records', [RecordController::class, 'index']);
+        Route::apiResource('asistencias', AsistenciaController::class);
     });
 
     //Rutas para Estudiantes
     Route::group(['middleware' => ['auth:api', 'role:user']], function () {
-        Route::apiResource('tags', TagController::class);
+        Route::post('records', [RecordController::class, 'store']);
     });
-
-    Route::apiResource('activities', ActivityController::class);
-    Route::apiResource('records', RecordController::class);
 

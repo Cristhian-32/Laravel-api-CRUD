@@ -49,7 +49,7 @@ class RecordController extends Controller
             'level' => $request['level'],
             'evidence' => $evidence_image,
             'date' => $date_now,
-            'hour' => $time_now
+            'time' => $time_now
 
         ]);
 
