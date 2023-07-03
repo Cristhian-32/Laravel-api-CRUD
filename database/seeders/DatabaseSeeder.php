@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Activity;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         //Seeders
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ActivitySeeder::class);
 
 
         //Factories

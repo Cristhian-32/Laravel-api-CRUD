@@ -23,7 +23,9 @@ class ActivityPostRequest extends FormRequest
     {
         return [
 
+            'title'=>'required',
             'body'=>'required',
+            'date'=>'required'
             //'image'=>'required'
 
         ];

@@ -16,7 +16,6 @@ class ActivityController extends Controller
         $this->middleware('auth:api');
     }
 
-
     public function index()
     {
         $activities = Activity::all();
@@ -40,8 +39,10 @@ class ActivityController extends Controller
         $image = $this->saveImage($request->image, 'activities');
 
         $activity = Activity::create([
-            'body' => $request['body'],
             'user_id' => auth()->user()->id,
+            'title'=>$request['title'],
+            'body' => $request['body'],
+            'date'=>$request['date'],
             'image' => $image
         ]);
 
@@ -72,7 +73,9 @@ class ActivityController extends Controller
         }
 
         Log::channel('stderr')->info($request);
+        $activity->title = $input['title'];
         $activity->body = $input['body'];
+        $activity->date = $input['date'];
         $activity->save();
 
         return response()->json([
@@ -93,7 +96,7 @@ class ActivityController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $imagePath,
+            'data' => Activity::all(),
             'message' => "Registro eliminado correctamente",
         ], 200);
     }
