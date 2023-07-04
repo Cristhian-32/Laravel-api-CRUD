@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->string('code')->unique();
             $table->string('level');
-            $table->dateTime('date');
+            $table->date('date');
             $table->timestamps();
         });
     }

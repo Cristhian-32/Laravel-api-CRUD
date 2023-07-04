@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AuthController extends Controller
 {
@@ -198,6 +199,9 @@ class AuthController extends Controller
         $user->load('roles'); // Carga la relación "roles"
         $roles = $user->roles->pluck('roleName')->toArray(); // Accede a la relación "roles"
 
+        $name = $user->name;
+        $email = $user->email;
+
         $minutes = auth('api')->factory()->getTTL() * 60;
         $timestamp = now()->addMinute($minutes);
         $expires_at = date('M d, Y H:i A', strtotime($timestamp));
@@ -207,6 +211,11 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_at' => $expires_at,
+            //'name' => $user->name,
+            'profile' => [
+                'name' => $name,
+                'email' => $email
+            ],
             'roles' => $roles
         ], 200);
     }

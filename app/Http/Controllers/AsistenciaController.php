@@ -35,7 +35,7 @@ class AsistenciaController extends Controller
     public function store(AsistenciaPostRequest $request)
     {
 
-        $date_now = Carbon::now()->toDateTimeString();
+        $date_now = Carbon::now()->toDateString();
 
         $asistencia = Asistencia::create([
             'user_id' => auth()->user()->id,
@@ -48,7 +48,7 @@ class AsistenciaController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $asistencia,
+            'data' => Asistencia::all(),
             'message' => "record saved successfully!",
             //'name' => $activity
         ], 200);
