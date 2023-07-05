@@ -55,7 +55,7 @@ class RecordController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $record,
+            'data' => Record::all(),
             'message' => "record saved successfully!",
             //'name' => $activity
         ], 200);
