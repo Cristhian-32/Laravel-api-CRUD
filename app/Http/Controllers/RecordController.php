@@ -105,7 +105,7 @@ class RecordController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $record,
+            'data' => Record::all(),
             'message' => "Registro eliminado correctamente",
         ], 200);
     }
